@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>JSON, Excel Converter</title>
+<meta charset="utf-8"/>
+</head>
+<body>
+    <h1>Convert JSON To Excel</h1>
+    <input id = 'json' type='file'/>
+    <button id="convert-json">Convert and Download</button>
+
+    <h3>JSON Formatting Rules</h3>
+    <p> {</p>
+    <p>"_willIgnoreThis" : {...},</p>
+    <p>"en" : {</p>
+    <p>     "row1" : "all rows should be in ",</p>
+    <p>     "row2" : "the same order"</p>
+    <p>},</p>
+    <p>"ge" : {</p>
+    <p>     "row1" : "and identical",</p>
+    <p>     "row2" : "for all elements (elements being en and ge)"</p>
+    <p>}</p>
+    <p>}</p>
+    
+    <h1>Convert Excel To JSON</h1>
+    <input id = 'excel' type='file'/>
+    <button id="convert-excel">Convert and Download</button>
+
+
+</body>
+</html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+<script src="./index.js"></script>
