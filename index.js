@@ -1,6 +1,8 @@
 
 var json;
 var csv;
+const rowDelim = '\r\n';
+const delim = ';';
 
 const fileSelectorJson = document.getElementById('json');
 fileSelectorJson.addEventListener('change', async (event) => {
@@ -23,9 +25,9 @@ convertJsonButton.addEventListener('click', async (event) => {
 });
 const JSONToCSVConvertor = (json, ReportTitle) => {
 
-    const delim = ',';
 
-    var CSV = '';
+
+    var CSV = 'sep=;' + rowDelim;
     CSV += 'variables' + delim;
 
     var totalRows = 0;
@@ -45,7 +47,7 @@ const JSONToCSVConvertor = (json, ReportTitle) => {
         }
     }
     //next row 
-    CSV += '\r\n';
+    CSV += rowDelim;
 
     //the rest of the rows
     for (let i = 0; i < totalRows; i++) {
@@ -71,7 +73,7 @@ const JSONToCSVConvertor = (json, ReportTitle) => {
         }
 
         //next row
-        CSV += '\r\n';
+        CSV += rowDelim;
     }
 
 
@@ -125,14 +127,13 @@ convertCsvButton.addEventListener('click', async (event) => {
 });
 
 const CSVToJSONConverter = (csv, title) => {
-    const rowDelim = '\r\n'
     console.log('csv string: ' + csv)
     if (!csv) return;
     const rows = csv.split(rowDelim);
 
     const json = {};
-    //first row = language mode names
-    const langArr = rows[0].split(',');
+    //second row = language mode names
+    const langArr = rows[1].split(delim);
     for (let col = 1; col < langArr.length; col++) {
         //make objects
         const lang = langArr[col];
@@ -142,8 +143,8 @@ const CSVToJSONConverter = (csv, title) => {
         }
     }
 
-    for (let row = 1; row < rows.length; row++) {
-        const columns = rows[row].split(',');
+    for (let row = 2; row < rows.length; row++) {
+        const columns = rows[row].split(delim);
         const row_var_name = columns[0];
         for (let col = 1; col < columns.length; col++) {
             const lang = langArr[col];
