@@ -1,33 +1,83 @@
 <!DOCTYPE html>
 <html>
-<head>
-<title>JSON, Excel Converter</title>
-<meta charset="utf-8"/>
-</head>
-<body>
-    <h1>Convert JSON To Excel</h1>
-    <input id = 'json' type='file'/>
-    <button id="convert-json">Convert and Download</button>
 
-    <h3>JSON Formatting Rules</h3>
-    <p> {</p>
-    <p>"_willIgnoreThis" : {...},</p>
-    <p>"en" : {</p>
-    <p>     "row1" : "all rows should be in ",</p>
-    <p>     "row2" : "the same order"</p>
-    <p>},</p>
-    <p>"ge" : {</p>
-    <p>     "row1" : "and identical",</p>
-    <p>     "row2" : "for all elements (elements being en and ge)"</p>
-    <p>}</p>
-    <p>}</p>
-    
-    <h1>Convert Excel To JSON</h1>
-    <input id = 'csv' type='file'/>
-    <button id="convert-csv">Convert and Download</button>
+<head>
+    <title>JSON/CSV Converter</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="index.css">
+
+</head>
+
+<body>
+    <div class="flex">
+        <div class="col">
+            <div class="title">JSON To CSV</div>
+            <div>
+                <label id = 'json_label' for="json" class="btn">Upload language.json</label>
+                <input id='json' type='file' />
+            </div>
+            <div class="button_grp">
+                <button disabled id="convert-json">Download RT_Mobile_Language.csv</button>
+            </div>
+
+            <div>
+                <div class="subtitle">JSON Formatting Rules</div>
+                <div> {</div>
+                <div>"_willIgnore" : "any keys starting with _",</div>
+                <div>"col1" : {</div>
+                <div> "row1" : "all rows should be in ",</div>
+                <div> "row2" : "the same order"</div>
+                <div>},</div>
+                <div>"col2" : {</div>
+                <div> "row1" : "and identical",</div>
+                <div> "row2" : "for all columns"</div>
+                <div>}</div>
+                <div>}</div>
+
+            </div>
+
+            <div>
+                <div class="subtitle">CSV Conversion Rules</div>
+                <div>
+                    sep=; (semicolons are reserved as column delimiters)
+                </div>
+                <div>
+                    \r\n (row delimiters)
+                </div>
+            </div>
+
+
+
+        </div>
+        <div class="col">
+            <div class="title">Excel To CSV</div>
+            <div>
+                <label id = 'csv_label' for="csv" class="btn">Upload language.csv</label>
+                <input id='csv' type='file' />
+            </div>
+            <div class="button_grp">
+                <button disabled id="convert-csv">Download language.json</button>
+
+            </div>
+            <div>
+                <div class="subtitle">CSV Conversion Rules</div>
+                <div>
+                    sep=; (semicolons are reserved as column delimiters)
+                </div>
+                <div>
+                    \r\n (row delimiters)
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+
 
 
 </body>
+
 </html>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>

@@ -5,8 +5,10 @@ const rowDelim = '\r\n';
 const delim = ';';
 
 const fileSelectorJson = document.getElementById('json');
+const convertJsonButton = document.getElementById('convert-json');
 fileSelectorJson.addEventListener('change', async (event) => {
-    json = await parseJsonFile(event.target.files[0])
+    json = await parseJsonFile(event.target.files[0]);
+    convertJsonButton.disabled = false;
     console.log(json);
 });
 async function parseJsonFile(file) {
@@ -19,14 +21,10 @@ async function parseJsonFile(file) {
 }
 /////////////////////////////////////////////////////////////////
 
-const convertJsonButton = document.getElementById('convert-json');
 convertJsonButton.addEventListener('click', async (event) => {
-    JSONToCSVConvertor(json, "Lang_Setting");
+    JSONToCSVConvertor(json, "RT_Mobile_Language");
 });
 const JSONToCSVConvertor = (json, ReportTitle) => {
-
-
-
     var CSV = 'sep=;' + rowDelim;
     CSV += 'variables' + delim;
 
@@ -105,8 +103,10 @@ const JSONToCSVConvertor = (json, ReportTitle) => {
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 const fileSelectorExcel = document.getElementById('csv');
+const convertCsvButton = document.getElementById('convert-csv');
 fileSelectorExcel.addEventListener('change', async (event) => {
     csv = await parseCsvFile(event.target.files[0]);
+    convertCsvButton.disabled = false;
     console.log(csv);
 
 });
@@ -120,16 +120,23 @@ async function parseCsvFile(file) {
 }
 
 /////////////////////////////////////////////////////////////////
-const convertCsvButton = document.getElementById('convert-csv');
 convertCsvButton.addEventListener('click', async (event) => {
-    console.log('convert csv clicked!')
     CSVToJSONConverter(csv, "language");
 });
 
 const CSVToJSONConverter = (csv, title) => {
     console.log('csv string: ' + csv)
-    if (!csv) return;
+    if (!csv)
+    {
+        alert("Invalid csv file!");
+        return;
+    }
     const rows = csv.split(rowDelim);
+    if(rows.length < 2) 
+    {
+        alert("Invalid csv file!");
+        return;
+    }
 
     const json = {};
     //second row = language mode names
@@ -154,8 +161,6 @@ const CSVToJSONConverter = (csv, title) => {
             }
         }
     }
-
-    console.log(json);
 
     //Initialize file format you want csv or xls
     var uri = 'data:text/csv;charset=utf-8,' + encodeURIComponent(JSON.stringify(json));
