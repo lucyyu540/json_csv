@@ -107,7 +107,7 @@ const convertCsvButton = document.getElementById('convert-csv');
 fileSelectorExcel.addEventListener('change', async (event) => {
     csv = await parseCsvFile(event.target.files[0]);
     convertCsvButton.disabled = false;
-    console.log(csv);
+    //console.log(csv);
 
 });
 async function parseCsvFile(file) {
@@ -125,7 +125,6 @@ convertCsvButton.addEventListener('click', async (event) => {
 });
 
 const CSVToJSONConverter = (csv, title) => {
-    console.log('csv string: ' + csv)
     if (!csv)
     {
         alert("Invalid csv file!");
@@ -140,19 +139,21 @@ const CSVToJSONConverter = (csv, title) => {
 
     const json = {};
     //second row = language mode names
-    const langArr = rows[1].split(delim);
+    const langArr = rows[0].split(delim);
     for (let col = 1; col < langArr.length; col++) {
         //make objects
         const lang = langArr[col];
+        console.log(lang);
         if(lang) 
         {
             json[lang] = {};
         }
     }
 
-    for (let row = 2; row < rows.length; row++) {
+    for (let row = 1; row < rows.length; row++) {
         const columns = rows[row].split(delim);
         const row_var_name = columns[0];
+        console.log(columns);
         for (let col = 1; col < columns.length; col++) {
             const lang = langArr[col];
             if(lang) 
