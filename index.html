@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>JSON/CSV Converter</title>
+    <title>JSON/Excel Converter</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="index.css">
 
@@ -11,63 +11,74 @@
 <body>
     <div class="flex">
         <div class="col">
-            <div class="title">JSON To CSV</div>
-            <div>
-                <label id = 'json_label' for="json" class="btn">Upload language.json</label>
-                <input id='json' type='file' />
-            </div>
-            <div class="button_grp">
-                <button disabled id="convert-json">Download RT_Mobile_Language.csv</button>
-            </div>
-
-            <div>
-                <div class="subtitle">JSON Formatting Rules</div>
-                <div> {</div>
-                <div>"_willIgnore" : "any keys starting with _",</div>
-                <div>"col1" : {</div>
-                <div> "row1" : "all rows should be in ",</div>
-                <div> "row2" : "the same order"</div>
-                <div>},</div>
-                <div>"col2" : {</div>
-                <div> "row1" : "and identical",</div>
-                <div> "row2" : "for all columns"</div>
-                <div>}</div>
-                <div>}</div>
-
-            </div>
-
-            <div>
-                <div class="subtitle">CSV Conversion Rules</div>
+            <div class="section">
+                <div class="title">JSON To Excel</div>
                 <div>
-                    sep=; (semicolons are reserved as column delimiters)
+                    <label id='json_label' for="json" class="btn">Upload language.json</label>
+                    <input id='json' type='file' />
                 </div>
+
                 <div>
-                    \r\n (row delimiters)
+                    <div class="subtitle">JSON Formatting Rules</div>
+                    <div> {</div>
+                    <div>"_willIgnore" : "any keys starting with _",</div>
+                    <div>"col1" : {</div>
+                    <div> "row1" : "all rows should be in ",</div>
+                    <div> "row2" : "the same order"</div>
+                    <div>},</div>
+                    <div>"col2" : {</div>
+                    <div> "row1" : "and identical",</div>
+                    <div> "row2" : "for all columns"</div>
+                    <div>}</div>
+                    <div>}</div>
+
                 </div>
+
             </div>
-
-
 
         </div>
-        <div class="col">
-            <div class="title">Excel To CSV</div>
-            <div>
-                <label id = 'csv_label' for="csv" class="btn">Upload language.csv</label>
-                <input id='csv' type='file' />
-            </div>
-            <div class="button_grp">
-                <button disabled id="convert-csv">Download language.json</button>
 
-            </div>
-            <div>
-                <div class="subtitle">CSV Conversion Rules</div>
+        <div class="col">
+            <div class="section">
+                <div class="title">Excel To JSON</div>
                 <div>
-                    sep=; (semicolons are reserved as column delimiters)
+                    <label id='excel_label' for="excel" class="btn">Upload language.xlsx</label>
+                    <input id='excel' type='file' />
                 </div>
+
                 <div>
-                    \r\n (row delimiters)
+                    <div class="subtitle">Excel Conversion Rules</div>
+                    <div>
+                        File must be encoded in utf-8.
+                    </div>
+                    <div>
+                        This converter will only read the first sheet.
+                    </div>
                 </div>
             </div>
+
+            <div class="section">
+                <div class="title">Txt To JSON</div>
+                <div>
+                    <label id='txt_label' for="txt" class="btn">Upload language.txt</label>
+                    <input id='txt' type='file' />
+                </div>
+
+                <div>
+                    <div class="subtitle">Excel Conversion Rules</div>
+                    <div>
+                        File must be saved as Unicode Text (*.txt).
+                    </div>
+                    <div>
+                        sep=\t (\t is reserved for column delimiters)
+                    </div>
+                    <div>
+                        \r\n (row delimiters)
+                    </div>
+                </div>
+            </div>
+
+
 
         </div>
 
@@ -79,6 +90,9 @@
 </body>
 
 </html>
+<!-- (A) LOAD SHEETJS FROM CDN -->
+<!-- https://sheetjs.com/ -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/jszip.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.8.0/xlsx.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
 <script src="./index.js"></script>
